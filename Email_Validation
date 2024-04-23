@@ -1,0 +1,81 @@
+Activity_main.xml:
+
+<?xml version="1.0" encoding="utf-8"?> 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+xmlns:tools="http://schemas.android.com/tools" 
+android:layout_width="match_parent" 
+android:layout_height="match_parent" 
+android:padding="16dp" 
+tools:context=".MainActivity"> 
+<EditText 
+android:id="@+id/editTextEmail" 
+android:layout_width="match_parent" 
+android:layout_height="wrap_content" 
+android:hint="Email" 
+android:inputType="textEmailAddress" 
+android:layout_marginBottom="8dp"/> 
+<EditText 
+android:id="@+id/editTextPassword" 
+android:layout_width="match_parent" 
+android:layout_height="wrap_content" 
+android:hint="Password" 
+android:inputType="textPassword" 
+android:layout_below="@id/editTextEmail" 
+android:layout_marginTop="8dp" 
+android:layout_marginBottom="16dp"/> 
+<Button 
+android:id="@+id/btnLogin" 
+android:layout_width="match_parent" 
+android:layout_height="wrap_content" 
+android:text="Login" 
+android:layout_below="@id/editTextPassword" 
+android:layout_marginTop="16dp" 
+android:enabled="false"/> 
+</RelativeLayout> 
+
+ActivityMain.java :
+import android.os.Bundle; 
+import android.text.Editable; 
+import android.text.TextUtils; 
+import android.text.TextWatcher; 
+import android.view.View; 
+import android.widget.Button; 
+import android.widget.EditText; 
+import androidx.appcompat.app.AppCompatActivity; 
+public class MainActivity extends AppCompatActivity { 
+private EditText editTextEmail, editTextPassword; 
+private Button btnLogin; 
+@Override 
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+setContentView(R.layout.activity_main); 
+editTextEmail = findViewById(R.id.editTextEmail); 
+editTextPassword = findViewById(R.id.editTextPassword); 
+btnLogin = findViewById(R.id.btnLogin); 
+// Add text change listener to email EditText 
+editTextEmail.addTextChangedListener(new TextWatcher() { 
+@Override 
+public void beforeTextChanged(CharSequence charSequence, int start, int before, int 
+count) { 
+} 
+@Override 
+public void onTextChanged(CharSequence charSequence, int start, int before, int 
+count) { 
+// Enable the login button only if the email is not empty and is a valid email 
+address 
+btnLogin.setEnabled(!TextUtils.isEmpty(charSequence) && 
+android.util.Patterns.EMAIL_ADDRESS.matcher(charSequence).matches()); 
+} 
+@Override 
+public void afterTextChanged(Editable editable) { 
+} 
+}); 
+// Add click listener to login button 
+btnLogin.setOnClickListener(new View.OnClickListener() { 
+@Override 
+public void onClick(View view) { 
+// Implement your login logic here 
+} 
+}); 
+} 
+}
