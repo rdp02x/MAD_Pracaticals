@@ -1,0 +1,90 @@
+LAB-11:- Create simple Application which show the use of Radio button, take 3 radio button. 
+When radio button is selected we have to show the text of radio button using Toast. 
+
+XML file :
+
+<?xml version="1.0" encoding="utf-8"?> 
+<androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+xmlns:app="http://schemas.android.com/apk/res-auto" 
+xmlns:tools="http://schemas.android.com/tools" 
+android:layout_width="match_parent" 
+android:layout_height="match_parent" 
+tools:context=".RadioButtonLab_11"> 
+<RadioGroup 
+android:id="@+id/radioGroup" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:orientation="vertical" 
+app:layout_constraintEnd_toEndOf="parent" 
+app:layout_constraintStart_toStartOf="parent" 
+app:layout_constraintTop_toTopOf="parent"/> 
+<RadioButton 
+android:id="@+id/radioButtonTomato" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_marginTop="110dp" 
+android:text="Tomato" 
+app:layout_constraintEnd_toEndOf="parent" 
+app:layout_constraintStart_toStartOf="parent" 
+app:layout_constraintTop_toTopOf="parent" 
+tools:ignore="MissingConstraints" /> 
+<RadioButton 
+android:id="@+id/radioButtonBrinjal" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_marginTop="48dp" 
+android:text="Brinjal" 
+app:layout_constraintStart_toStartOf="@+id/radioButtonTomato" 
+app:layout_constraintTop_toBottomOf="@+id/radioButtonTomato" 
+tools:ignore="MissingConstraints" /> 
+<RadioButton 
+android:id="@+id/radioButtonPotato" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_marginTop="51dp" 
+android:text="Potato" 
+app:layout_constraintStart_toStartOf="@+id/radioButtonBrinjal" 
+app:layout_constraintTop_toBottomOf="@+id/radioButtonBrinjal" 
+tools:ignore="MissingConstraints" /> 
+/> 
+</androidx.constraintlayout.widget.ConstraintLayout> 
+
+MainActivity.java :
+
+package com.example.welcome; 
+import androidx.appcompat.app.AppCompatActivity; 
+import android.os.Bundle; 
+import android.widget.RadioButton; 
+import android.widget.RadioGroup; 
+import android.widget.Toast; 
+public class RadioButtonLab_11 extends AppCompatActivity { 
+RadioGroup radioGroup; 
+@Override 
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+setContentView(R.layout.activity_radio_button_lab11); 
+//A radio button is a widget that allows users to select a single option from a set of 
+mutually exclusive choices. 
+//It's commonly used in scenarios where users need to choose one option from multiple 
+options presented in a list. 
+radioGroup = findViewById(R.id.radioGroup); 
+radioGroup.setOnCheckedChangeListener(new 
+RadioGroup.OnCheckedChangeListener() { 
+@Override 
+public void onCheckedChanged(RadioGroup group, int checkedId) { 
+//here no need to pass the radioButton id which is given in xml file. R.id. job is 
+doing by checkedId 
+RadioButton radioButton = findViewById(checkedId); 
+if (radioButton.isChecked()){ 
+Toast.makeText(getApplicationContext(),"You 
+selected"+radioButton.getText().toString(),Toast.LENGTH_LONG).show(); 
+} else { 
+Toast.makeText(getApplicationContext(),"Not 
+selected",Toast.LENGTH_LONG).show(); 
+ 
+                } 
+              } 
+        }); 
+    } 
+} 
