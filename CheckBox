@@ -1,0 +1,105 @@
+LAB-12:- Create simple Application which show the use of Checkbox component, take 3 checkbox 
+and 1 button when you check the checkboxs and click on button then you have to show which 
+checkbox is check with text of checkbox using Toast. 
+
+XML file :
+
+<?xml version="1.0" encoding="utf-8"?> 
+<androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:padding="16dp" 
+    tools:context=".CheckBoxLab_12"> 
+    <CheckBox 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/checkbox1" 
+        android:text="CheckBoxOne" 
+        android:layout_marginTop="16dp" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintEnd_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+ 
+    <CheckBox 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/checkbox2" 
+        android:text="CheckBoxTwo" 
+        android:layout_marginTop="36dp" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintEnd_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+    <CheckBox 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/checkbox3" 
+        android:text="CheckBoxThree" 
+        android:layout_marginTop="60dp" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintEnd_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+ 
+    <Button 
+        android:id="@+id/showButton" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Show Checked Checkboxes" 
+        android:layout_marginTop="200dp" 
+        app:layout_constraintStart_toStartOf="parent" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+</androidx.constraintlayout.widget.ConstraintLayout> 
+
+MainActivity.java :
+
+package com.example.welcome; 
+ 
+import static android.os.Build.VERSION_CODES.R; 
+ 
+import androidx.appcompat.app.AppCompatActivity; 
+ 
+import android.os.Bundle; 
+import android.view.View; 
+import android.widget.Button; 
+import android.widget.CheckBox; 
+import android.widget.Toast; 
+ 
+public class CheckBoxLab_12 extends AppCompatActivity { 
+    CheckBox checkBox1,checkBox2,checkBox3; 
+    Button btnCheck; 
+    @Override 
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_check_box_lab12); 
+ 
+        checkBox1 = findViewById(R.id.checkbox1); 
+        checkBox2 = findViewById(R.id.checkbox2); 
+        checkBox3 = findViewById(R.id.checkbox3); 
+        btnCheck =findViewById(R.id.showButton); 
+ 
+        btnCheck.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                showCheckedCheckboxes();  //it is user defined method 
+            } 
+        }); 
+ 
+    } 
+    private void showCheckedCheckboxes(){ 
+        StringBuilder checkedCheckBoxes = new StringBuilder("Checked Checkboxes : "); 
+        if (checkBox1.isChecked()){ 
+            checkedCheckBoxes.append("check box 1").append( checkBox1.getText()).append(","); 
+        } 
+        if (checkBox2.isChecked()){ 
+            checkedCheckBoxes.append("check box 2").append( checkBox2.getText()).append(","); 
+        } 
+if (checkBox3.isChecked()){ 
+checkedCheckBoxes.append("check box 3").append( checkBox3.getText()).append(","); 
+} 
+Toast.makeText(getApplicationContext(),checkedCheckBoxes.toString(),Toast.LENGTH_SHORT).show()
+ ; 
+} 
+} 
