@@ -1,0 +1,86 @@
+LAB-23:- Create application to insert data into table "student" using SQLite database. 
+
+DatabaseHelper.java  :
+
+package com.example.welcome; 
+import android.content.ContentValues; 
+import android.content.Context; 
+import android.database.Cursor; 
+import android.database.sqlite.SQLiteDatabase; 
+import android.database.sqlite.SQLiteOpenHelper; 
+ 
+import androidx.annotation.Nullable; 
+public class DatabaseHelper extends SQLiteOpenHelper { 
+    String Database_Name="paruldatabase"; 
+    int Database_version=1; 
+    //Table and column name 
+    String Table_name="student"; 
+    String id="_id"; 
+    String column_name="name"; 
+    String column_mark ="mark"; 
+    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable 
+SQLiteDatabase.CursorFactory factory, int version) { 
+        super(context, name, factory, version); 
+    } 
+    @Override 
+    public void onCreate(SQLiteDatabase db) { 
+        // Create your table 
+        String createTableQuery = "CREATE TABLE " + Table_name + "(" + 
+       id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + column_name + " TEXT, " + column_mark + " 
+INTEGER)"; 
+                db.execSQL(createTableQuery); 
+    } 
+    @Override 
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { 
+        //we will write when we require some logic 
+    } 
+    //create our own method to add the data in to database 
+    void addData(String name, int age){ 
+      SQLiteDatabase db  =this.getWritableDatabase(); 
+        ContentValues values =new ContentValues(); 
+        values.put(column_name,name); 
+        values.put(column_mark,age); 
+ 
+        //insert the new row 
+        db.insert(Table_name,null,values); 
+        db.close(); 
+    } 
+    // Create operation 
+    public long insertData(String name, int mark) { 
+        SQLiteDatabase db = this.getWritableDatabase(); 
+        ContentValues values = new ContentValues(); 
+        values.put(column_name, name); 
+        values.put(column_mark, mark); 
+        long newRowId = db.insert(Table_name, null, values); 
+        db.close(); 
+        return newRowId; 
+    } 
+ 
+
+
+
+MainActivity.java :
+
+import android.database.Cursor; 
+import android.os.Bundle; 
+import android.util.Log; 
+import android.view.View; 
+public class MainActivity extends AppCompatActivity { 
+ 
+    @Override 
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_main); 
+        // Create an instance of your DBHelper 
+        DatabaseHelper dbhelper = new DatabaseHelper(this, "paruldatabase", null, 1); 
+          Add data to the database 
+      //  dbhelper.addData("sam wibo", 25); 
+        //dbhelper.addData("John gibo", 26); 
+        //Log.d("MainActivity", "Newly inserted ID: "); 
+        long newId = dbhelper.insertData("Ajay", 25); 
+        Log.d("MainActivity", "Newly inserted ID: " + newId); 
+            } 
+            cursor.close(); 
+        } 
+            } 
+}
