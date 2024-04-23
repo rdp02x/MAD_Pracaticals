@@ -1,0 +1,116 @@
+LAB-13:- Create simple Application which show the use of CheckBox component, take 3 checkbox 
+when you check the checkboxs then you have to show which checkbox is check with text of 
+checkbox using Toast.
+  
+XML file:
+
+<?xml version="1.0" encoding="utf-8"?> 
+<androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    tools:context=".CheckBoxLab_13"> 
+    <CheckBox 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/checkbox1" 
+        android:text="CheckBoxOne" 
+        android:layout_marginTop="16dp" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintEnd_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+ 
+    <CheckBox 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/checkbox2" 
+        android:text="CheckBoxTwo" 
+        android:layout_marginTop="36dp" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintEnd_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+    <CheckBox 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/checkbox3" 
+        android:text="CheckBoxThree" 
+        android:layout_marginTop="60dp" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintEnd_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+ 
+</androidx.constraintlayout.widget.ConstraintLayout> 
+ 
+
+
+MainActivity.java :
+
+package com.example.welcome; 
+ 
+import androidx.appcompat.app.AppCompatActivity; 
+ 
+import android.os.Bundle; 
+import android.widget.CheckBox; 
+import android.widget.CompoundButton; 
+import android.widget.Toast; 
+ 
+public class CheckBoxLab_13 extends AppCompatActivity { 
+   CheckBox checkBox1,checkBox2,checkBox3; 
+   @Override 
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_check_box_lab13); 
+       checkBox1 = findViewById(R.id.checkbox1); 
+       checkBox2 = findViewById(R.id.checkbox2); 
+       checkBox3 = findViewById(R.id.checkbox3); 
+ 
+       checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { 
+            @Override 
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+                if(isChecked){ 
+                    //code to execute when checkbox is checked 
+                    Toast.makeText(getApplicationContext(),"The check box 1 is 
+checked",Toast.LENGTH_SHORT).show(); 
+                } 
+                else  { 
+                    Toast.makeText(getApplicationContext(),"The check box 1 is not 
+checked",Toast.LENGTH_SHORT).show(); 
+                } 
+            } 
+        }); 
+ 
+       checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { 
+           @Override 
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+               if(isChecked){ 
+                   //code to execute when checkbox is checked 
+                   Toast.makeText(getApplicationContext(),"The check box 2 is 
+checked",Toast.LENGTH_SHORT).show(); 
+               } 
+               else  { 
+                   Toast.makeText(getApplicationContext(),"The check box 2 is not 
+checked",Toast.LENGTH_SHORT).show(); 
+               } 
+           } 
+       }); 
+ 
+       checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { 
+           @Override 
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+               if(isChecked){ 
+                   //code to execute when checkbox is checked 
+                   Toast.makeText(getApplicationContext(),"The check box 3 is 
+checked",Toast.LENGTH_SHORT).show(); 
+               } 
+               else  { 
+                   Toast.makeText(getApplicationContext(),"The check box 3 is not 
+checked",Toast.LENGTH_SHORT).show(); 
+               } 
+           } 
+       }); 
+ 
+ 
+   } 
+}
