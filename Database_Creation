@@ -1,0 +1,57 @@
+LAB-22:- Create application to create "school.db" database and create table with name "student"  which contain columns (id, name, surname, mark) using SQLite database. 
+
+Ans- In this example, we are not creating the UI. We will display the stored data in Log.so that why we will only write the java code. 
+
+
+DatabaseHelper.java :
+
+package com.example.welcome; 
+import android.content.ContentValues; 
+import android.content.Context; 
+import android.database.Cursor; 
+import android.database.sqlite.SQLiteDatabase; 
+import android.database.sqlite.SQLiteOpenHelper; 
+import androidx.annotation.Nullable; 
+public class DatabaseHelper extends SQLiteOpenHelper { 
+String Database_Name="paruldatabase"; 
+int Database_version=1; 
+//Table and column name 
+String Table_name="student"; 
+String id="_id"; 
+String column_name="name"; 
+String column_mark ="mark"; 
+public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable 
+SQLiteDatabase.CursorFactory factory, int version) { 
+super(context, name, factory, version); 
+} 
+@Override 
+public void onCreate(SQLiteDatabase db) { 
+// Create your table 
+String createTableQuery = "CREATE TABLE " + Table_name + "(" + 
+id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + column_name + " TEXT, " + 
+column_mark + " INTEGER)"; 
+db.execSQL(createTableQuery); 
+} 
+@Override 
+public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { 
+//we will write when we require some logic 
+} 
+}
+
+
+
+MainActivity.java :
+
+import android.database.Cursor; 
+import android.os.Bundle; 
+import android.util.Log; 
+import android.view.View; 
+public class MainActivity extends AppCompatActivity { 
+@Override 
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+setContentView(R.layout.activity_main); 
+// Create an instance of your DBHelper 
+DatabaseHelper dbhelper = new DatabaseHelper(this, "paruldatabase", null, 1); 
+} 
+}
