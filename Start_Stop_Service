@@ -1,0 +1,122 @@
+LAB-21:- Create application in which take two button start and stop service. When you press start button one service should be started and when you press stop then service should be destroy. 
+This project(Music Player app) will demonstrate the use of services in android. It has two button. Start and stop button. When you click on start button, automatically the default ringtone for mobile will 
+play and if you click on button stop, it will stop the default playing ringtone. You can see the UI for Apps 
+
+1) Create a java class name as MyCustomService in package(create this class where your activity file is available):
+
+package com.mastercoding.musicplayerapp; 
+import android.app.Service; 
+import android.content.Intent; 
+import android.media.MediaPlayer; 
+import android.os.IBinder; 
+import android.provider.Settings; 
+import androidx.annotation.Nullable; 
+//this is lab no 21 
+public class MyCustomService extends Service { 
+    // To Play music, we need a media player object 
+    private MediaPlayer player; 
+    @Override 
+    public int onStartCommand(Intent intent, int flags, int startId) { 
+ 
+        // this will play the audio of default ringtone in the device 
+        player = MediaPlayer.create( 
+                this, 
+                Settings.System.DEFAULT_RINGTONE_URI 
+        ); 
+        // play the ringtone audio on loop (continuously) 
+        player.setLooping(true); 
+        player.start(); 
+        return START_STICKY; 
+    } 
+    @Override 
+    public void onDestroy() { 
+        super.onDestroy(); 
+        player.stop(); 
+    @Nullable 
+    @Override 
+    public IBinder onBind(Intent intent) { 
+        return null; 
+    }}
+
+
+2) Write bellow code in MainActivity.java:
+
+package com.mastercoding.musicplayerapp; 
+import androidx.appcompat.app.AppCompatActivity; 
+import android.content.Intent; 
+import android.os.Bundle; 
+import android.view.View; 
+import android.widget.Button; 
+import android.widget.TextView; 
+public class MainActivity extends AppCompatActivity { 
+    TextView txt; 
+    Button start_btn, stop_btn; 
+    @Override 
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_main); 
+        start_btn = findViewById(R.id.start_btn); 
+        stop_btn = findViewById(R.id.stop_btn); 
+        txt = findViewById(R.id.textView); 
+        start_btn.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent serviceIntent = new Intent(getApplicationContext(), 
+                        MyCustomService.class); 
+                startService(serviceIntent); 
+            } 
+        }); 
+        stop_btn.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent serviceIntent = new Intent(getApplicationContext(), 
+                        MyCustomService.class); 
+                stopService(serviceIntent);  } 
+        }); } 
+}
+
+XML:
+
+<?xml version="1.0" encoding="utf-8"?> 
+<androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:background="@drawable/back" 
+    tools:context=".MainActivity"> 
+    <TextView 
+        android:id="@+id/textView" 
+        android:layout_width="0dp" 
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="28dp" 
+        android:gravity="center" 
+        android:text="The Services App" 
+        android:textColor="@color/white" 
+        android:textSize="32sp" 
+        android:textStyle="bold" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintHorizontal_bias="0.0" 
+        app:layout_constraintStart_toStartOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+    <Button 
+        android:id="@+id/start_btn" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="114dp" 
+        android:text="Start Service" 
+        app:layout_constraintBottom_toBottomOf="parent" 
+        app:layout_constraintEnd_toEndOf="parent" 
+        app:layout_constraintStart_toStartOf="parent" /> 
+    <Button 
+        android:id="@+id/stop_btn" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="36dp" 
+        android:text="Stop Service" 
+        app:layout_constraintBottom_toBottomOf="parent" 
+        app:layout_constraintEnd_toEndOf="@+id/start_btn" /> 
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
