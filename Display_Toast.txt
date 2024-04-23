@@ -1,0 +1,67 @@
+Assign 4:-
+
+
+***********Layout File(activity_main.xml)**********************
+<!-- res/layout/activity_main.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text"/>
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText"
+        android:layout_marginTop="16dp"
+        android:text="Submit"/>
+
+</RelativeLayout>
+
+
+
+***********Main Activity**********************
+// app/src/main/java/com.example.yourappname/MainActivity.java
+package com.example.yourappname;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        final EditText editText = findViewById(R.id.editText);
+        Button submitButton = findViewById(R.id.submitButton);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the text from the EditText
+                String enteredText = editText.getText().toString();
+
+                // Display the text in a toast
+                Toast.makeText(getApplicationContext(), "Text entered: " + enteredText, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+

@@ -1,0 +1,35 @@
+1. Create "Hello World" application. That will display "Hello World" in the middle of the screen in
+the red color with white background.
+
+XML File:
+<!-- activity_main.xml -->
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#FFFFFF"> <!-- White background color -->
+
+<TextView
+android:id="@+id/textHelloWorld"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Hello World"
+android:textColor="#FF0000" <!-- Red text color -->
+android:textSize="24sp"
+android:layout_centerInParent="true"/>
+</RelativeLayout>
+
+Java File:
+// MainActivity.java
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+}
+}
